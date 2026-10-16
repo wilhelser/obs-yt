@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Now Playing Overlay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Main on-stream overlay. Hidden until a YouTube video is detected. -->
+  <div id="now-playing" class="hidden">
+    <a id="overlay-link" href="#" target="_blank" rel="noopener noreferrer">
+      <img id="avatar" alt="" src="">
+      <div id="text">
+        <div id="channel-name"></div>
+        <div id="video-title"></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Settings gear: click to open the configuration panel. -->
+  <button id="settings-toggle" type="button" title="Settings (or press 's')">&#9881;</button>
+
+  <!-- Settings panel: configure obs-websocket connection and YouTube API key.
+       Not meant to appear on stream -- open this page in a normal browser tab
+       to configure it once before adding it as an OBS Browser Source. -->
+  <div id="settings-panel" class="hidden">
+    <form id="settings-form">
+      <h2>Now Playing Overlay Settings</h2>
+
+      <label for="obsUrl">obs-websocket URL</label>
+      <input id="obsUrl" name="obsUrl" type="text" placeholder="ws://127.0.0.1:4455">
+
+      <label for="obsPassword">obs-websocket Password</label>
+      <input id="obsPassword" name="obsPassword" type="password" placeholder="(optional)">
+
+      <label for="youtubeApiKey">YouTube Data API v3 Key</label>
+      <input id="youtubeApiKey" name="youtubeApiKey" type="text" placeholder="AIza...">
+
+      <label for="pollIntervalMs">Poll Interval (ms)</label>
+      <input id="pollIntervalMs" name="pollIntervalMs" type="number" min="500" step="500" placeholder="2000">
+
+      <label for="sourceNameFilter">Source Name Filter (optional)</label>
+      <input id="sourceNameFilter" name="sourceNameFilter" type="text" placeholder="Leave blank to watch all browser sources">
+
+      <div id="settings-actions">
+        <button id="settings-save" type="submit">Save</button>
+        <button id="settings-close" type="button">Close</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="vendor/obs-websocket-js.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/obs.js"></script>
+  <script src="js/youtube.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
